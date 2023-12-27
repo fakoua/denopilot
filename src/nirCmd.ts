@@ -46,12 +46,11 @@ export async function getNir(): Promise<string> {
   const swissKnifeFolder = join(getDenoDir(), "bin/swissknife/");
   const nirPath = join(swissKnifeFolder, "nircmd.exe");
   const ex = await exists(nirPath);
-  if (ex) {
-    return nirPath;
-  }
-  // Ensure directory
+  if (!ex) {
+    // Ensure directory
   await ensureDir(swissKnifeFolder);
   await create.createNirBin(nirPath);
+  }
   return nirPath;
 }
 

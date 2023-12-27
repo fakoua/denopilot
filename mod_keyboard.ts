@@ -1,1 +1,2 @@
-export {sendKey, type} from "./src/keyboardActions.ts"
+export {sendKey, typing} from "./src/keyboardActions.ts"
+export { Key } from "./src/models/Keys.ts";

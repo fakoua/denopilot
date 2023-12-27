@@ -237,3 +237,19 @@ export function byProcessId(processId: number): WindowFinder {
   return rtnVal
 }
 
+
+/**
+ * Finds the active window to execute an action.
+ * @date 12/26/2023 - 4:23:33 PM
+ *
+ * @export
+ * @returns {WindowFinder} WindowFinder which contains all the actions
+ */
+export function activeWindow(): WindowFinder {
+  const wf: WindowFind = {
+    active: true
+  }
+  const rtnVal: WindowFinder = new WindowFinder(wf)
+  return rtnVal
+}
+
