@@ -1,14 +1,15 @@
 import * as mouse from "../mouseActions.ts"
+import { ButtonActions, MouseButtons } from "./Types.ts";
 
 export * as mouse from "../mouseActions.ts"
 export class MouseButton {
-    private button: "right" | "left" | "middle"
+    private button: MouseButtons
 
-    constructor(button: "right" | "left" | "middle") {
+    constructor(button: MouseButtons) {
         this.button = button;
     }
 
-    private async doAction(action: "down" | "up" | "click" | "dblclick") {
+    private async doAction(action: ButtonActions) {
        await mouse.button({button: this.button, action: action})
     }
 

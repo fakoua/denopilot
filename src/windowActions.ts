@@ -1,8 +1,9 @@
 import { WindowFind } from "./models/WindowFindModel.ts";
-import { WindowAction } from "./models/WindowActionModel.ts";
+import { IWindowAction } from "./models/WindowActionModel.ts";
 import { getNirArgs } from "./utils.ts";
 import { runNirCmd } from "./nirCmd.ts";
 import { WindowFinder } from "./models/WindowFinder.ts";
+import { WindowActions } from "./models/Types.ts";
 
 
 /**
@@ -53,7 +54,7 @@ import { WindowFinder } from "./models/WindowFinder.ts";
  * @param {{
  *   window:
  *      WindowFind | string;
- *      action: WindowAction |
+ *      action: IWindowAction |
  *     "close" |
  *     "activate" |
  *     "flash" |
@@ -73,17 +74,8 @@ export async function windowActions(
   { window, action }: {
     window: WindowFind | string;
     action:
-      | WindowAction
-      | "close"
-      | "activate"
-      | "flash"
-      | "max"
-      | "min"
-      | "normal"
-      | "togglemin"
-      | "togglemax"
-      | "center"
-      | "focus";
+      | IWindowAction
+      | WindowActions;
   },
 ): Promise<number> {
   const args = getNirArgs(window, action);

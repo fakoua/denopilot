@@ -149,24 +149,6 @@ import {
   });
   
   Deno.test({
-    name: "Test-getNirArgs-exception-action",
-    fn(): void {
-      assertThrows(
-        () => {
-          getNirArgs({
-            title: {
-              match: "contains",
-              value: "notepad",
-            },
-          }, { action: "setsize" });
-        },
-        Error,
-        "Parameter action.size should be valid when the action is setsize or move",
-      );
-    },
-  });
-  
-  Deno.test({
     name: "Test-getNirArgs-exception-window-1",
     fn(): void {
       assertThrows(

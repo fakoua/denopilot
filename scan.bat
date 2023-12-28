@@ -1,1 +1,0 @@
-sonar-scanner.bat -Dsonar.login=sqa_a8e59ffb33aa078c2f7e76e5dff79ac6127c5163

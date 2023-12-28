@@ -2,6 +2,6 @@
   "tasks": {
     "dev": "deno run -A ./playground.ts",
     "test": "deno test --coverage=cov_profile",
-    "coverage": "deno test --coverage=.coverage && deno coverage --exclude=fixtures --exclude=test --lcov --output=lcov.info .coverage && deno run --allow-read https://deno.land/x/code_coverage@0.2.1/cli.ts"
+    "coverage": "deno test --coverage=.coverage && deno coverage --exclude=fixtures --exclude=test --lcov --output=lcov.info .coverage && deno run --allow-read https://deno.land/x/code_coverage@0.2.1/cli.ts && deno run -A ./fix-cov.ts"
   }
 }

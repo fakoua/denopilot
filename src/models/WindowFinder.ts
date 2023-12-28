@@ -1,5 +1,6 @@
 import { windowActions } from "../windowActions.ts";
-import { WindowAction } from "./WindowActionModel.ts";
+import { WindowActions } from "./Types.ts";
+import { IWindowAction } from "./WindowActionModel.ts";
 import { WindowFind } from "./WindowFindModel.ts";
 
 export class WindowFinder {
@@ -11,17 +12,8 @@ export class WindowFinder {
 
   private async doAction(
     action:
-      | WindowAction
-      | "close"
-      | "activate"
-      | "flash"
-      | "max"
-      | "min"
-      | "normal"
-      | "togglemin"
-      | "togglemax"
-      | "center"
-      | "focus",
+      | IWindowAction
+      | WindowActions,
   ): Promise<number> {
     return await windowActions({ window: this.wf, action: action });
   }
@@ -72,7 +64,7 @@ export class WindowFinder {
     width: number,
     height: number,
   ): Promise<number> {
-    const action: WindowAction = {
+    const action: IWindowAction = {
       action: "setsize",
       size: {
         x: x,
@@ -90,7 +82,7 @@ export class WindowFinder {
     width: number,
     height: number,
   ): Promise<number> {
-    const action: WindowAction = {
+    const action: IWindowAction = {
       action: "move",
       size: {
         x: x,

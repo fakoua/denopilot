@@ -1,18 +1,6 @@
-export interface WindowAction {
-  action:
-    | "close"
-    | "activate"
-    | "flash"
-    | "max"
-    | "min"
-    | "normal"
-    | "togglemin"
-    | "togglemax"
-    | "setsize"
-    | "move"
-    | "center"
-    | "focus";
-  size?: {
+export interface IWindowAction {
+  action: "setsize" | "move"
+  size: {
     x: number;
     y: number;
     width: number;

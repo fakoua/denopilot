@@ -1,4 +1,5 @@
 import { MouseButton } from "./models/MouseButton.ts";
+import { ButtonActions, MouseButtons } from "./models/Types.ts";
 import * as nirCmd from "./nirCmd.ts";
 
 
@@ -26,13 +27,13 @@ export async function setCursor(x: number, y: number): Promise<number> {
  *
  * @export
  * @async
- * @param {({ button: "right" | "left" | "middle"; action: "down" | "up" | "click" | "dblclick"; })} param0
- * @param {("right" | "left" | "middle")} param0.button
- * @param {("down" | "up" | "click" | "dblclick")} param0.action
+ * @param {({ button: MouseButtons; action: ButtonActions; })} param0
+ * @param {(MouseButtons)} param0.button
+ * @param {(ButtonActions)} param0.action
  * @returns {Promise<number>}
  */
 export async function button(
-{ button, action }: { button: "right" | "left" | "middle"; action: "down" | "up" | "click" | "dblclick"; },
+{ button, action }: { button: MouseButtons; action: ButtonActions; },
 ): Promise<number> {
   const args: Array<string> = ["sendmouse"];
   args.push(button);

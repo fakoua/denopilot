@@ -1,4 +1,5 @@
-import { WindowAction } from "./models/WindowActionModel.ts";
+import { WindowActions } from "./models/Types.ts";
+import { IWindowAction } from "./models/WindowActionModel.ts";
 import { WindowFind } from "./models/WindowFindModel.ts";
 import { validateNotBlank } from "./nirCmd.ts";
 
@@ -8,34 +9,17 @@ import { validateNotBlank } from "./nirCmd.ts";
  *
  * @export
  * @param {(WindowFind | string)} window
- * @param {(WindowAction | string)} action
+ * @param {(IWindowAction | string)} action
  */
 export function getNirArgs(
     window: WindowFind | string,
     action:
-      | WindowAction
-      | "close"
-      | "activate"
-      | "flash"
-      | "max"
-      | "min"
-      | "normal"
-      | "togglemin"
-      | "togglemax"
-      | "center"
-      | "focus",
+      | IWindowAction
+      | WindowActions,
   ): Array<string> {
-    //check if the arguments are consistent
-    //If setSize or move are passed the size should have value
-    const act = typeof action === "string" ? action : action.action;
+
+    const act = typeof action === "string" ? action : (action as IWindowAction).action;
   
-    if (act === "setsize" || act === "move") {
-      if (typeof action === "string" || action.size === undefined) {
-        throw new Error(
-          "Parameter action.size should be valid when the action is setsize or move",
-        );
-      }
-    }
   
     //Assert that at least one window find option is passed
     if (
@@ -54,11 +38,11 @@ export function getNirArgs(
     const winArgs = getWindowArgs(window);
     args.push(...winArgs);
   
-    if (typeof action !== "string" && action.size) {
-      args.push(action.size.x.toString());
-      args.push(action.size.y.toString());
-      args.push(action.size.width.toString());
-      args.push(action.size.height.toString());
+    if (typeof action !== "string") {
+        args.push((action as IWindowAction).size.x.toString());
+        args.push((action as IWindowAction).size.y.toString());
+        args.push((action as IWindowAction).size.width.toString());
+        args.push((action as IWindowAction).size.height.toString());
     }
   
     return args;
