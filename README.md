@@ -1,6 +1,6 @@
 # denopilot
-
-## Description:
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fakoua_denopilot&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fakoua_denopilot)
+## Description
 DenoPilot is a Windows Desktop automation module for Deno, written in TypeScript. It empowers users to automate various tasks on their Windows systems, enhancing productivity and enabling software testing scenarios.
 
 ## Table of contents
@@ -9,6 +9,7 @@ DenoPilot is a Windows Desktop automation module for Deno, written in TypeScript
     * [Window Actions](#window-actions)
     * [Keyboard Actions](#keyboard-actions)
     * [Mouse Actions](#mouse-actions)
+    * [Clipboard Actions](#clipboard-actions)
 * [License](#license)
 
 ## Key Features:
