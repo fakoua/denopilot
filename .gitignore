@@ -1,5 +1,4 @@
-cov_profile/
 deno.lock
 playground.ts
 .scannerwork/
-cov_profile.lcov
+.coverage
