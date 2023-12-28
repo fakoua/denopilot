@@ -8,12 +8,11 @@ import * as nirCmd from "./nirCmd.ts";
  *
  * @export
  * @async
- * @param {{ x: number; y: number; }} param0
- * @param {number} param0.x
- * @param {number} param0.y
+ * @param {number} x
+ * @param {number} y
  * @returns {Promise<number>}
  */
-export async function setCursor({ x, y }: { x: number; y: number; }): Promise<number> {
+export async function setCursor(x: number, y: number): Promise<number> {
   const args: Array<string> = ["setcursor"];
   args.push(x.toString());
   args.push(y.toString());

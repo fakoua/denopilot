@@ -178,7 +178,59 @@ sendKey({ key, action }: { key: Key; action: "press" | "down" | "up" }): Promise
 ```ts
 import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
 // Press the 'A' key
-await sendKey({ key: keyboard.Key.A, action: "press" });
+await keyboard.sendKey({ key: keyboard.Key.A, action: "press" });
+```
+
+-------------
+
+#### copy: Simulate Ctrl + C to copy the selected content.
+#### Signature:
+```ts
+copy(): Promise<void>
+```
+#### Examples:
+```ts
+import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
+await keyboard.copy()
+```
+
+-------------
+
+#### paste: Simulate Ctrl + V to paste the clipboard content.
+#### Signature:
+```ts
+paste(): Promise<void>
+```
+#### Examples:
+```ts
+import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
+await keyboard.paste()
+```
+
+-------------
+
+#### cut: Simulate Ctrl + X to cut the selected content.
+#### Signature:
+```ts
+cut(): Promise<void>
+```
+#### Examples:
+```ts
+import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
+await keyboard.cut()
+```
+
+-------------
+
+#### selectAll: Simulate Ctrl + A to select all.
+#### Signature:
+```ts
+selectAll(): Promise<void>
+```
+#### Examples:
+```ts
+import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
+await keyboard.selectAll()
 ```
 
 ## Mouse Actions
@@ -186,6 +238,46 @@ await sendKey({ key: keyboard.Key.A, action: "press" });
 ### Overview
 
 This `mod` provides TypeScript functions for interacting with the mouse and cursor position. Leveraging the nirCmd tool, these utilities empower users to manipulate the cursor and simulate mouse button actions programmatically.
+
+### Usage
+
+#### setCursor: Sets the mouse cursor position.
+#### Signature:
+```ts
+setCursor(x: number, y: number): Promise<number>
+```
+#### Examples:
+```ts
+import * as mouse from "https://deno.land/x/denopilot/mod_mouse.ts";
+await mouse.setCursor(0, 0)
+```
+-------------
+
+#### left: Returns the left mouse button to perform actions.
+#### Signature:
+```ts
+left(): MouseButton
+```
+#### Examples:
+```ts
+import * as mouse from "https://deno.land/x/denopilot/mod_mouse.ts";
+await await mouse.left().click()
+//Also you can use left, right and middle buttons
+```
+`MouseButton` class contains the following actions:
+* **click**: mouse click
+* **down**: mouse button down
+* **up**: mouse button up (release the button)
+* **doubleClick**: mouse button double click
+
+-------------
+
+## Clipboard Actions
+
+### Overview
+
+This `mod` Allows you to set a value into the clipboard and clear the clipboard.
+
 
 ## License:
 This project is licensed under the MIT License

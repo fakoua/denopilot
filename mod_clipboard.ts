@@ -1,0 +1,1 @@
+export { setText } from "./src/clipboardActions.ts"
