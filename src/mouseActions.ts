@@ -3,7 +3,7 @@ import * as nirCmd from "./nirCmd.ts";
 
 
 /**
- * Description placeholder
+ * Set cursor position
  * @date 12/26/2023 - 4:51:31 PM
  *
  * @export
