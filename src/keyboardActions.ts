@@ -68,6 +68,79 @@ export async function typing(text: string): Promise<void> {
   }
 }
 
+
+/**
+ * Simulate Ctrl + X: Cut
+ * @date 12/27/2023 - 9:38:36 PM
+ *
+ * @export
+ * @async
+ * @example
+ * ```ts
+ * await keyboard.cut()
+ * ```
+ * @returns {Promise<void>}
+ */
+export async function cut(): Promise<void> {
+  await sendKey({key: Key.Ctrl, action: "down"})
+  await sendKey({key: Key.X, action: "press"})
+  await sendKey({key: Key.Ctrl, action: "up"})
+}
+
+/**
+ * Simulate Ctrl + C: Copy
+ * @date 12/27/2023 - 9:38:36 PM
+ *
+ * @export
+ * @async
+ * @example
+ * ```ts
+ * await keyboard.copy()
+ * ```
+ * @returns {Promise<void>}
+ */
+export async function copy(): Promise<void> {
+  await sendKey({key: Key.Ctrl, action: "down"})
+  await sendKey({key: Key.C, action: "press"})
+  await sendKey({key: Key.Ctrl, action: "up"})
+}
+
+/**
+ * Simulate Ctrl + V: Paste
+ * @date 12/27/2023 - 9:38:36 PM
+ *
+ * @export
+ * @async
+ * @example
+ * ```ts
+ * await keyboard.paste()
+ * ```
+ * @returns {Promise<void>}
+ */
+export async function paste(): Promise<void> {
+  await sendKey({key: Key.Ctrl, action: "down"})
+  await sendKey({key: Key.V, action: "press"})
+  await sendKey({key: Key.Ctrl, action: "up"})
+}
+
+/**
+ * Simulate Ctrl + A: Select All
+ * @date 12/27/2023 - 9:38:36 PM
+ *
+ * @export
+ * @async
+ * @example
+ * ```ts
+ * await keyboard.selectAll()
+ * ```
+ * @returns {Promise<void>}
+ */
+export async function selectAll(): Promise<void> {
+  await sendKey({key: Key.Ctrl, action: "down"})
+  await sendKey({key: Key.A, action: "press"})
+  await sendKey({key: Key.Ctrl, action: "up"})
+}
+
 async function typeChar(chars: Array<number>): Promise<void> {
   if (chars.length !== 1 && chars.length !== 3) {
     //Char not supported

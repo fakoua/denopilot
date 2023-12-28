@@ -3,6 +3,7 @@ import { ensureDir } from "https://deno.land/std@0.210.0/fs/ensure_dir.ts";
 import { exists } from "https://deno.land/std@0.210.0/fs/exists.ts";
 import * as create from "./tsToCmd.ts";
 import { OS } from "./models/OSModel.ts";
+import { parseArgs } from "https://deno.land/std@0.210.0/cli/parse_args.ts";
 
 /**
  * Run nircmd
@@ -17,11 +18,14 @@ export async function runNirCmd(args: Array<string>): Promise<number> {
   const currentOs = getOS();
   if (currentOs !== OS.windows) {
     console.error(
-      "\r\n  --> Sorry, Currently SwissKnife supports Windows OS Only :(\r\n",
+      "\r\n  --> Sorry, Currently DenoPilot supports Windows OS Only :(\r\n",
     );
     return -1;
   }
   const nirCmd = await getNir();
+  if (isDebug()) {
+    console.debug(nirCmd, args)
+  }
   const p = new Deno.Command(nirCmd, {
     args: args,
     stderr: "piped",
@@ -43,12 +47,12 @@ export function getOS(): OS {
 }
 
 export async function getNir(): Promise<string> {
-  const swissKnifeFolder = join(getDenoDir(), "bin/swissknife/");
-  const nirPath = join(swissKnifeFolder, "nircmd.exe");
+  const denoPilotFolder = join(getDenoDir(), "bin/denopilot/");
+  const nirPath = join(denoPilotFolder, "nircmd.exe");
   const ex = await exists(nirPath);
   if (!ex) {
     // Ensure directory
-  await ensureDir(swissKnifeFolder);
+  await ensureDir(denoPilotFolder);
   await create.createNirBin(nirPath);
   }
   return nirPath;
@@ -81,4 +85,9 @@ export function getDenoDir(): string {
 
 export function isBlank(str: string) {
   return (!str || /^\s*$/.test(str));
+}
+
+function isDebug(): boolean {
+  const parsedArgs = parseArgs(Deno.args);
+  return parsedArgs.debug
 }
