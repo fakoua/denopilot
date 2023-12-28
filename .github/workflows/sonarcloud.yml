@@ -28,7 +28,10 @@ jobs:
 
       - name: Export cov files
         run: deno coverage cov_profile --lcov --output=cov_profile.lcov
-        
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+      
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
