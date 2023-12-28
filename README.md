@@ -279,7 +279,6 @@ await await mouse.left().click()
 
 This `mod` Allows you to set a value into the clipboard and clear the clipboard.
 
-
 ## License:
 This project is licensed under the MIT License
 
