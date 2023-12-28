@@ -18,7 +18,7 @@ export function getNirArgs(
       | WindowActions,
   ): Array<string> {
 
-    const act = typeof action === "string" ? action : (action as IWindowAction).action;
+    const act = typeof action === "string" ? action : action.action;
   
   
     //Assert that at least one window find option is passed
@@ -39,10 +39,10 @@ export function getNirArgs(
     args.push(...winArgs);
   
     if (typeof action !== "string") {
-        args.push((action as IWindowAction).size.x.toString());
-        args.push((action as IWindowAction).size.y.toString());
-        args.push((action as IWindowAction).size.width.toString());
-        args.push((action as IWindowAction).size.height.toString());
+        args.push(action.size.x.toString());
+        args.push(action.size.y.toString());
+        args.push(action.size.width.toString());
+        args.push(action.size.height.toString());
     }
   
     return args;
