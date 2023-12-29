@@ -1,1 +1,1 @@
-export { setText } from "./src/clipboardActions.ts"
+export { setText, clear } from "./src/clipboard-actions.ts"

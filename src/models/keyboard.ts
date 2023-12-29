@@ -1,4 +1,9 @@
-import { AsciiVCode } from "./AsciiVCodeModel.ts";
+export interface AsciiVCode {
+  ascii: number
+  vCode: number
+  shift: boolean
+  desc: string
+}
 
 export enum Key {
   Backspace = 8,
@@ -252,4 +257,4 @@ export const ASCII_VCODE: Array<AsciiVCode> = [
   { ascii: 124, vCode: 220, shift: true, desc: "Vertical bar" },
   { ascii: 125, vCode: 221, shift: true, desc: "Closing brace" },
   { ascii: 126, vCode: 192, shift: true, desc: "Equivalency sign - tilde" },
-];
+]

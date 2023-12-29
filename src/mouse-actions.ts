@@ -1,7 +1,5 @@
-import { MouseButton } from "./models/MouseButton.ts";
-import { ButtonActions, MouseButtons } from "./models/Types.ts";
+import { ButtonActions, MouseButtons } from "./models/mouse.ts";
 import * as nirCmd from "./nirCmd.ts";
-
 
 /**
  * Set cursor position
@@ -21,27 +19,33 @@ export async function setCursor(x: number, y: number): Promise<number> {
   return res;
 }
 
-/**
- * Description placeholder
- * @date 12/26/2023 - 4:51:37 PM
- *
- * @export
- * @async
- * @param {({ button: MouseButtons; action: ButtonActions; })} param0
- * @param {(MouseButtons)} param0.button
- * @param {(ButtonActions)} param0.action
- * @returns {Promise<number>}
- */
-export async function button(
-{ button, action }: { button: MouseButtons; action: ButtonActions; },
-): Promise<number> {
-  const args: Array<string> = ["sendmouse"];
-  args.push(button);
-  args.push(action);
-  const res = await nirCmd.runNirCmd(args);
-  return res;
-}
+export class MouseButton {
+  private button: MouseButtons
 
+  constructor(button: MouseButtons) {
+      this.button = button
+  }
+
+  private async doAction(action: ButtonActions) {
+     await button({button: this.button, action: action})
+  }
+
+  public async click() {
+      await this.doAction("click")
+  }
+
+  public async down() {
+      await this.doAction("down")
+  }
+
+  public async up() {
+      await this.doAction("up")
+  }
+
+  public async doubleClick() {
+      await this.doAction("dblclick")
+  }
+}
 
 /**
  * Returns the left mouse button to perform actions (click, down, up, double click)
@@ -94,3 +98,24 @@ export function middle(): MouseButton {
   return rtnVal
 }
 
+/**
+ * Access to mouse buttons
+ * @date 12/26/2023 - 4:51:37 PM
+ *
+ * @export
+ * @async
+ * @param {({ button: MouseButtons; action: ButtonActions; })} param0
+ * @param {(MouseButtons)} param0.button
+ * @param {(ButtonActions)} param0.action
+ * @returns {Promise<number>}
+ */
+async function button(
+  { button, action }: { button: MouseButtons; action: ButtonActions; },
+  ): Promise<number> {
+    const args: Array<string> = ["sendmouse"];
+    args.push(button);
+    args.push(action);
+    const res = await nirCmd.runNirCmd(args);
+    return res;
+  }
+  

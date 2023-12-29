@@ -1,6 +1,5 @@
-import { ASCII_VCODE, Key } from "./models/Keys.ts";
+import { ASCII_VCODE, Key } from "./models/keyboard.ts";
 import * as nirCmd from "./nirCmd.ts";
-
 
 /**
  * Sends keyboard input.
@@ -42,7 +41,6 @@ export async function sendKey(
   return res;
 }
 
-
 /**
  * Type an input string using sendKeys
  * @date 12/26/2023 - 4:35:03 PM
@@ -67,7 +65,6 @@ export async function typing(text: string): Promise<void> {
     await typeChar(virtualKey);
   }
 }
-
 
 /**
  * Simulate Ctrl + X: Cut

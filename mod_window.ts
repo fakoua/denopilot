@@ -1,1 +1,9 @@
-export {byProcessId, byProcessName, byTitleContains, byTitleEndsWith, byTitleExact, byTitleStartsWith} from "./src/windowActions.ts"
+export {
+  byProcessId,
+  byProcessName,
+  byTitleContains,
+  byTitleEndsWith,
+  byTitleExact,
+  byTitleStartsWith,
+  activeWindow,
+} from "./src/window-actions.ts";
