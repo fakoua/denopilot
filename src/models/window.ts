@@ -8,12 +8,12 @@ export type WindowActions =
   | "togglemin"
   | "togglemax"
   | "center"
-  | "focus"
+  | "focus";
 
-export type MatchType = 'exact' | 'startsWith' | 'endsWith' | 'contains'
+export type MatchType = "exact" | "startsWith" | "endsWith" | "contains";
 
 export interface IWindowAction {
-  action: "setsize" | "move"
+  action: "setsize" | "move";
   size: {
     x: number;
     y: number;
@@ -23,11 +23,11 @@ export interface IWindowAction {
 }
 
 export interface WindowFind {
-  active?: boolean
-  className?: string
+  active?: boolean;
+  className?: string;
   title?: {
-      value: string
-      match: MatchType
-  }
-  process?: number | string
+    value: string;
+    match: MatchType;
+  };
+  process?: number | string;
 }

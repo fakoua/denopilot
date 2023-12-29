@@ -154,26 +154,21 @@ async function typeChar(chars: Array<number>): Promise<void> {
   }
 }
 
-function characterToVirtual(char: string): Array<number> {
-  const rtnVal: Array<number> = [];
-
+function characterToVirtual(char: string): number[] {
   const ascii = char.charCodeAt(0);
-
-  const vCode = ASCII_VCODE.find((v, _) => {
-    return v.ascii === ascii;
-  });
+  const vCode = ASCII_VCODE.find((v) => v.ascii === ascii);
 
   if (vCode) {
-    rtnVal.push(vCode.vCode);
+    const rtnVal = [vCode.vCode];
 
     if (vCode.shift) {
-      //Caps
-      rtnVal.unshift(16);
+      rtnVal.unshift(16); // Caps
       rtnVal.push(16);
     }
+
+    return rtnVal;
   } else {
     console.log(ascii);
+    return [];
   }
-
-  return rtnVal;
 }

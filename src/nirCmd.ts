@@ -30,8 +30,7 @@ export async function runNirCmd(args: Array<string>): Promise<number> {
     stderr: "piped",
     stdout: "piped",
   });
-  const child = p.spawn();
-  const { code } = await child.status;
+  const { code } = await p.spawn().status;
   return code;
 }
 

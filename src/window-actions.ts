@@ -23,8 +23,7 @@ export function byTitleExact(title: string): WindowFinder {
       match: "exact"
     }
   }
-  const rtnVal: WindowFinder = new WindowFinder(wf)
-  return rtnVal
+  return new WindowFinder(wf)
 }
 
 /**
@@ -48,8 +47,7 @@ export function byTitleContains(title: string): WindowFinder {
       match: "contains"
     }
   }
-  const rtnVal: WindowFinder = new WindowFinder(wf)
-  return rtnVal
+  return new WindowFinder(wf)
 }
 
 /**
@@ -73,8 +71,7 @@ export function byTitleStartsWith(title: string): WindowFinder {
       match: "startsWith"
     }
   }
-  const rtnVal: WindowFinder = new WindowFinder(wf)
-  return rtnVal
+  return new WindowFinder(wf)
 }
 
 /**
@@ -98,8 +95,7 @@ export function byTitleEndsWith(title: string): WindowFinder {
       match: "endsWith"
     }
   }
-  const rtnVal: WindowFinder = new WindowFinder(wf)
-  return rtnVal
+  return new WindowFinder(wf)
 }
 
 /**
@@ -120,8 +116,7 @@ export function byProcessName(processName: string): WindowFinder {
   const wf: WindowFind = {
     process: processName
   }
-  const rtnVal: WindowFinder = new WindowFinder(wf)
-  return rtnVal
+  return new WindowFinder(wf)
 }
 
 /**
@@ -142,8 +137,7 @@ export function byProcessId(processId: number): WindowFinder {
   const wf: WindowFind = {
     process: processId
   }
-  const rtnVal: WindowFinder = new WindowFinder(wf)
-  return rtnVal
+  return new WindowFinder(wf)
 }
 
 /**
@@ -157,16 +151,11 @@ export function activeWindow(): WindowFinder {
   const wf: WindowFind = {
     active: true
   }
-  const rtnVal: WindowFinder = new WindowFinder(wf)
-  return rtnVal
+  return new WindowFinder(wf)
 }
 
 export class WindowFinder {
-  private wf: WindowFind;
-
-  public constructor(wf: WindowFind) {
-    this.wf = wf;
-  }
+  constructor(private readonly wf: WindowFind) {}
 
   private async doAction(
     action:
@@ -339,38 +328,21 @@ async function windowActions(
  * @param {(WindowFind | string)} window
  * @param {(IWindowAction | string)} action
  */
-function getNirArgs(
-  window: WindowFind | string,
-  action:
-    | IWindowAction
-    | WindowActions,
-): Array<string> {
-
+function getNirArgs(window: WindowFind | string, action: IWindowAction | WindowActions): string[] {
   const act = typeof action === "string" ? action : action.action;
 
-
-  //Assert that at least one window find option is passed
   if (
-    typeof window !== "string" && window.active === undefined &&
-    window.className === undefined && window.process === undefined &&
-    window.title === undefined
+    typeof window !== "string" &&
+    ["active", "className", "process", "title"].every((prop) => window[prop as keyof WindowFind] === undefined)
   ) {
-    throw new Error(
-      "Parameter window should be valid: title, active, class or process",
-    );
+    throw new Error("Parameter window should be valid: title, active, class, or process");
   }
 
-  const args: Array<string> = [];
-  args.push(act);
-
-  const winArgs = getWindowArgs(window);
-  args.push(...winArgs);
+  const args: string[] = [act, ...getWindowArgs(window)];
 
   if (typeof action !== "string") {
-      args.push(action.size.x.toString());
-      args.push(action.size.y.toString());
-      args.push(action.size.width.toString());
-      args.push(action.size.height.toString());
+    const { x, y, width, height } = action.size;
+    args.push(x.toString(), y.toString(), width.toString(), height.toString());
   }
 
   return args;
@@ -423,15 +395,12 @@ function getWindowArgs(window: WindowFind | string): Array<string> {
   return args;
 }
 
-function matchConvert(match: "exact" | "startsWith" | "endsWith" | "contains") {
-  switch (match) {
-    case "exact":
-      return "title";
-    case "contains":
-      return "ititle";
-    case "endsWith":
-      return "etitle";
-    case "startsWith":
-      return "stitle";
-  }
+function matchConvert(match: "exact" | "startsWith" | "endsWith" | "contains"): string {
+  const matchMap: Record<string, string> = {
+    exact: "title",
+    contains: "ititle",
+    endsWith: "etitle",
+    startsWith: "stitle",
+  };
+  return matchMap[match];
 }

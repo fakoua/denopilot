@@ -12,38 +12,31 @@ import * as nirCmd from "./nirCmd.ts";
  * @returns {Promise<number>}
  */
 export async function setCursor(x: number, y: number): Promise<number> {
-  const args: Array<string> = ["setcursor"];
-  args.push(x.toString());
-  args.push(y.toString());
-  const res = await nirCmd.runNirCmd(args);
-  return res;
+  const args = ["setcursor", x.toString(), y.toString()];
+  return await nirCmd.runNirCmd(args);
 }
 
 export class MouseButton {
-  private button: MouseButtons
-
-  constructor(button: MouseButtons) {
-      this.button = button
-  }
+  constructor(private readonly button: MouseButtons) {}
 
   private async doAction(action: ButtonActions) {
-     await button({button: this.button, action: action})
+    await button({ button: this.button, action });
   }
 
-  public async click() {
-      await this.doAction("click")
+  async click() {
+    await this.doAction("click");
   }
 
-  public async down() {
-      await this.doAction("down")
+  async down() {
+    await this.doAction("down");
   }
 
-  public async up() {
-      await this.doAction("up")
+  async up() {
+    await this.doAction("up");
   }
 
-  public async doubleClick() {
-      await this.doAction("dblclick")
+  async doubleClick() {
+    await this.doAction("dblclick");
   }
 }
 
@@ -60,7 +53,7 @@ export class MouseButton {
  * ```
  */
 export function left(): MouseButton {
-  const rtnVal: MouseButton = new MouseButton("left")
+  const rtnVal = new MouseButton("left")
   return rtnVal
 }
 
@@ -77,7 +70,7 @@ export function left(): MouseButton {
  * ```
  */
 export function right(): MouseButton {
-  const rtnVal: MouseButton = new MouseButton("right")
+  const rtnVal = new MouseButton("right")
   return rtnVal
 }
 
@@ -94,7 +87,7 @@ export function right(): MouseButton {
  * ```
  */
 export function middle(): MouseButton {
-  const rtnVal: MouseButton = new MouseButton("middle")
+  const rtnVal = new MouseButton("middle")
   return rtnVal
 }
 
@@ -109,13 +102,8 @@ export function middle(): MouseButton {
  * @param {(ButtonActions)} param0.action
  * @returns {Promise<number>}
  */
-async function button(
-  { button, action }: { button: MouseButtons; action: ButtonActions; },
-  ): Promise<number> {
-    const args: Array<string> = ["sendmouse"];
-    args.push(button);
-    args.push(action);
-    const res = await nirCmd.runNirCmd(args);
-    return res;
-  }
+async function button({ button, action }: { button: MouseButtons; action: ButtonActions }): Promise<number> {
+  const args = ["sendmouse", button, action];
+  return await nirCmd.runNirCmd(args);
+}
   
