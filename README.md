@@ -7,9 +7,16 @@ DenoPilot is a Windows Desktop automation module for Deno, written in TypeScript
 * [Key Features](#key-features)
 * [Getting Started](#getting-started)
     * [Window Actions](#window-actions)
+        * [byTitleExact](#bytitleexact-finds-a-window-with-an-exact-title-to-execute-actions)
+        * [byTitleContains](#bytitlecontains-finds-a-window-with-an-exact-title-to-execute-actions)
+        * [byTitleStartsWith](#bytitlestartswith-finds-a-window-with-a-title-starting-with-specified-text-to-execute-actions)
+        * [byTitleEndsWith](#bytitleendswith-finds-a-window-with-a-title-ending-with-specified-text-to-execute-actions)
+        * [byProcessName](#byprocessname-finds-a-window-associated-with-a-specified-process-name-to-execute-actions)
+        * [byProcessId](#byprocessid-finds-a-window-associated-with-a-specified-process-id-to-execute-actions)
+        * [byActiveWindow](#byactivewindow-finds-the-active-window-to-execute-an-action)
     * [Keyboard Actions](#keyboard-actions)
     * [Mouse Actions](#mouse-actions)
-    * [Clipboard Actions](#clipboard-actions)
+    * [System](#system-actions)
 * [License](#license)
 
 ## Key Features:
@@ -26,9 +33,9 @@ Simulate keyboard strokes, enabling automated data input or interaction with app
 
 Control the mouse, including movement, left and right clicks, and scrolling.
 
-### Clipboard Management:
+### System Actions:
 
-Manipulate the clipboard content, facilitating seamless data transfer between applications.
+System actions including beeps, speak, clipboard, tray ballon and notifications.
 
 ### Use Cases:
 
@@ -136,16 +143,16 @@ await win.byProcessId(1234).max();
 
 -------------
 
-#### activeWindow: Finds the active window to execute an action.
+#### byActiveWindow: Finds the active window to execute an action.
 #### Signature:
 ```ts
-activeWindow(): WindowFinder
+byActiveWindow(): WindowFinder
 ```
 #### Examples:
 ```ts
 import * as win from "https://deno.land/x/denopilot/mod_window.ts";
 // Maximize the active window
-await win.activeWindow().max();
+await win.byActiveWindow().max();
 ```
 
 ## Keyboard Actions
@@ -273,11 +280,11 @@ await await mouse.left().click()
 
 -------------
 
-## Clipboard Actions
+## System Actions
 
 ### Overview
 
-This `mod` Allows you to set a value into the clipboard and clear the clipboard.
+This `mod` Allows you access and control various system actions.
 
 ## License:
 This project is licensed under the MIT License

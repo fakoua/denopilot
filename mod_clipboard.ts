@@ -1,1 +1,0 @@
-export { setText, clear } from "./src/clipboard-actions.ts"

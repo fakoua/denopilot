@@ -5,5 +5,5 @@ export {
   byTitleEndsWith,
   byTitleExact,
   byTitleStartsWith,
-  activeWindow,
+  btActiveWindow,
 } from "./src/window-actions.ts";

@@ -1,6 +1,5 @@
-import { IWindowAction, WindowFind } from "./models/window.ts";
+import { IWindowAction, WindowFind, WindowActions } from "./models/window.ts";
 import { runNirCmd, validateNotBlank } from "./nirCmd.ts";
-import { WindowActions } from "./models/window.ts";
 
 /**
  * Find window by exact title to execute an action
@@ -147,13 +146,23 @@ export function byProcessId(processId: number): WindowFinder {
  * @export
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
-export function activeWindow(): WindowFinder {
+export function btActiveWindow(): WindowFinder {
   const wf: WindowFind = {
     active: true
   }
   return new WindowFinder(wf)
 }
 
+
+/**
+ * Window Finder class
+ * This class is the main window finder which contains all the actions.
+ * @date 12/29/2023 - 10:42:52 AM
+ *
+ * @export
+ * @class WindowFinder
+ * @typedef {WindowFinder}
+ */
 export class WindowFinder {
   constructor(private readonly wf: WindowFind) {}
 

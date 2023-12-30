@@ -1,1 +1,1 @@
-export { screenshot } from "./src/system-actions.ts"
+export { beep, screenshot, winbeep, speak, setClipboard, clearClipboard, trayBalloon } from "./src/system-actions.ts"

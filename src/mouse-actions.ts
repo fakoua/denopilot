@@ -16,6 +16,15 @@ export async function setCursor(x: number, y: number): Promise<number> {
   return await nirCmd.runNirCmd(args);
 }
 
+
+/**
+ * Mouse buttons class
+ * @date 12/29/2023 - 10:42:12 AM
+ *
+ * @export
+ * @class MouseButton
+ * @typedef {MouseButton}
+ */
 export class MouseButton {
   constructor(private readonly button: MouseButtons) {}
 
