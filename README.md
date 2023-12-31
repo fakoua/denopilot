@@ -8,6 +8,7 @@ DenoPilot is a Windows Desktop automation module for Deno, written in TypeScript
 
 ## Table of contents
 
+- [Examples](#example)
 - [Key Features](#key-features)
 - [Getting Started](#getting-started)
   - [Window Actions](#window-actions)
@@ -25,7 +26,7 @@ DenoPilot is a Windows Desktop automation module for Deno, written in TypeScript
 
 ## Example:
 
-> “_How software developers read documentation: Examples speak louder than words._”<br> ><sub>**― ChatGPT**, November 30, 2022</sub>
+> “_How software developers read documentation: Examples speak louder than words._”<br>   <sub>**― ChatGPT**, November 30, 2022</sub>
 
 In this example, we demonstrate the capabilities of automation of **DenoPilot**. The script begins by activating the **Notepad**, selecting all existing text, deleting it, and replacing it with 'Hello, I'm DenoPilot ...' message. Following this, it captures a screenshot of the **Notepad** and pastes the image in **mspaint**. Then it minimizes the notepad, maximizes the mspaint and displays a notification message 'I'm done,'.
 
