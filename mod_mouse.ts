@@ -1,1 +1,1 @@
-export {left, right, middle, setCursor} from "./src/mouse-actions.ts"
+export { left, middle, right, setCursor } from "./src/mouse-actions.ts";

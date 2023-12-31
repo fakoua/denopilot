@@ -160,9 +160,8 @@ export async function clearClipboard(): Promise<number> {
   return await nirCmd.runNirCmd(["clipboard", "clear"]);
 }
 
-
 /**
- * Description placeholder
+ * Display a tray ballon.
  * @date 12/29/2023 - 11:24:46 PM
  *
  * @export
@@ -174,17 +173,122 @@ export async function clearClipboard(): Promise<number> {
  * @param {number} balloon.timeout - Tray Ballon timeout in milliseconds.
  * @example
  * ```ts
- * await system.trayBalloon({title:"Deno", text:"Hello from deno", icon: 300, timeout:2000})
+ * await system.balloon({title:"Deno", text:"Hello from deno", icon: 300, timeout:2000})
  * ```
- * @returns {Promise<number>}
+ * @returns {Promise<number>} process exit code.
  */
-export async function trayBalloon(balloon: Balloon): Promise<number> {
+export async function balloon(balloon: Balloon): Promise<number> {
   const args: string[] = [
     "trayballoon",
     balloon.title,
     balloon.text,
     `shell32.dll,${balloon.icon}`,
     balloon.timeout.toString(),
+  ];
+  return await nirCmd.runNirCmd(args);
+}
+
+/**
+ * Set the computer sound volume
+ * @param volume from 0 (mute) to 100 (highest)
+ * @example
+ * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts";
+ * //Set the volume
+ * await system.setVolume(90) //value between 0 to 100
+ * ```
+ * @returns the process exit code
+ */
+export async function setVolume(volume: number): Promise<number> {
+  const v = Math.floor(655.35 * volume);
+  const args = [
+    "setsysvolume",
+    v.toString(),
+  ];
+  return await nirCmd.runNirCmd(args);
+}
+
+/**
+ * Mute the system sound
+ * @example
+ * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
+ * await system.mute()
+ * ```
+ * @returns the process exit code
+ */
+export async function mute(): Promise<number> {
+  return await toggleMute(1);
+}
+
+/**
+ * Unmute the system sound
+ * @example
+ * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
+ * await system.unmute()
+ * ```
+ * @returns the process exit code
+ */
+export async function unmute(): Promise<number> {
+  return await toggleMute(0);
+}
+
+/**
+ * Question Box dialog
+ * @example
+ * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
+ * const res = await system.questionBox("A Question", "Do you want to quite smoking?")
+ * if (res) {
+ *     console.log("Great, keep trying!")
+ * } else {
+ *     console.log("Not Great, but keep trying!")
+ * }
+ * ```
+ * @param title Question Box Title
+ * @param text Question Box question text
+ * @returns true if the user clicks YES
+ */
+export async function questionBox(
+  title: string,
+  text: string,
+): Promise<boolean> {
+  const args = [
+    "qboxcom",
+    text,
+    title,
+    "returnval",
+    "0x30",
+  ];
+  const exitCode = await nirCmd.runNirCmd(args);
+  return exitCode === 48;
+}
+
+/**
+ * InfoBox dialog
+ * @example
+ * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
+ * await system.infoBox("Deno", "Deno is great!")
+ * ```
+ * @param title InfoBox title
+ * @param text InfoBox message
+ * @returns the process exit code
+ */
+export async function infoBox(title: string, text: string): Promise<number> {
+  const args = [
+    "infobox",
+    text,
+    title,
+  ];
+  return await nirCmd.runNirCmd(args);
+}
+
+async function toggleMute(v: number): Promise<number> {
+  const args = [
+    "mutesysvolume",
+    v.toString(),
   ];
   return await nirCmd.runNirCmd(args);
 }

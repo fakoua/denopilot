@@ -1,1 +1,14 @@
-export { beep, screenshot, winbeep, speak, setClipboard, clearClipboard, trayBalloon } from "./src/system-actions.ts"
+export {
+  balloon,
+  beep,
+  clearClipboard,
+  infoBox,
+  mute,
+  questionBox,
+  screenshot,
+  setClipboard,
+  setVolume,
+  speak,
+  unmute,
+  winbeep,
+} from "./src/system-actions.ts";
