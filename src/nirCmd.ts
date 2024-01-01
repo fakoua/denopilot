@@ -1,8 +1,8 @@
-import { join } from "https://deno.land/std@0.210.0/path/mod.ts"
-import { ensureDir } from "https://deno.land/std@0.210.0/fs/ensure_dir.ts"
-import { exists } from "https://deno.land/std@0.210.0/fs/exists.ts"
-import { parseArgs } from "https://deno.land/std@0.210.0/cli/parse_args.ts"
-import { bin as nirBin } from "./bin/nircmd.ts"
+import { join } from "https://deno.land/std@0.210.0/path/mod.ts";
+import { ensureDir } from "https://deno.land/std@0.210.0/fs/ensure_dir.ts";
+import { exists } from "https://deno.land/std@0.210.0/fs/exists.ts";
+import { parseArgs } from "https://deno.land/std@0.210.0/cli/parse_args.ts";
+import { bin as nirBin } from "./bin/nircmd.ts";
 
 /**
  * Run nircmd
@@ -23,7 +23,7 @@ export async function runNirCmd(args: Array<string>): Promise<number> {
   }
   const nirCmd = await getNir();
   if (isDebug()) {
-    console.debug(nirCmd, args)
+    console.debug(nirCmd, args);
   }
   const p = new Deno.Command(nirCmd, {
     args: args,
@@ -54,8 +54,8 @@ async function getNir(): Promise<string> {
   const ex = await exists(nirPath);
   if (!ex) {
     // Ensure directory
-  await ensureDir(denoPilotFolder);
-  await createNirBin(nirPath);
+    await ensureDir(denoPilotFolder);
+    await createNirBin(nirPath);
   }
   return nirPath;
 }
@@ -87,7 +87,7 @@ function getDenoDir(): string {
 
 function isDebug(): boolean {
   const parsedArgs = parseArgs(Deno.args);
-  return parsedArgs.debug
+  return parsedArgs.debug;
 }
 
 enum OS {
@@ -102,13 +102,13 @@ enum OS {
 }
 
 async function createNirBin(nirPath: string) {
-  const binContent = atob(nirBin)
+  const binContent = atob(nirBin);
   const binArray = new Uint8Array(binContent.length);
-  
+
   let ctn = 0;
-  binContent.split("").forEach(char => {
-      binArray[ctn++] =  char.charCodeAt(0);
+  binContent.split("").forEach((char) => {
+    binArray[ctn++] = char.charCodeAt(0);
   });
-  
-  await Deno.writeFile(nirPath, binArray)
+
+  await Deno.writeFile(nirPath, binArray);
 }

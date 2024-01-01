@@ -11,9 +11,9 @@ import * as nirCmd from "./nirCmd.ts";
  * @param {number} y
  * @returns {Promise<number>}
  */
-export async function setCursor(x: number, y: number): Promise<number> {
+export function setCursor(x: number, y: number): Promise<number> {
   const args = ["setcursor", x.toString(), y.toString()];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
 
 
@@ -111,8 +111,8 @@ export function middle(): MouseButton {
  * @param {(ButtonActions)} param0.action
  * @returns {Promise<number>}
  */
-async function button({ button, action }: { button: MouseButtons; action: ButtonActions }): Promise<number> {
+function button({ button, action }: { button: MouseButtons; action: ButtonActions }): Promise<number> {
   const args = ["sendmouse", button, action];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
   

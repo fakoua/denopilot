@@ -43,7 +43,7 @@ import * as nirCmd from "./nirCmd.ts";
  * ```
  * @returns {Promise<number>}
  */
-export async function screenshot(
+export function screenshot(
   mode: ScreenshotMode | IScreenRegion,
   imagePath: string,
 ): Promise<number> {
@@ -60,7 +60,7 @@ export async function screenshot(
     args.push("savescreenshot", imagePath, ...Object.values(mode).map(String));
   }
 
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
 
 /**
@@ -79,12 +79,12 @@ export async function screenshot(
  * ```
  * @returns {Promise<number>}
  */
-export async function beep(
+export function beep(
   frequency: number,
   duration: number,
 ): Promise<number> {
   const args: string[] = ["beep", frequency.toString(), duration.toString()];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
 
 /**
@@ -100,9 +100,9 @@ export async function beep(
  * ```
  * @returns {Promise<number>}
  */
-export async function winbeep(): Promise<number> {
+export function winbeep(): Promise<number> {
   const args: string[] = ["stdbeep"];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
 
 /**
@@ -117,14 +117,14 @@ export async function winbeep(): Promise<number> {
  * @param {number=} speech.volume - Optional: Volume of the Speech between 0 and 100
  * @returns {Promise<number>}
  */
-export async function speak(speech: Speech): Promise<number> {
+export function speak(speech: Speech): Promise<number> {
   const args: string[] = ["speak", "text", speech.text];
   const rate = speech.rate ?? 0;
   args.push(rate.toString());
   if (speech.volume) {
     args.push(speech.volume.toString());
   }
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
 
 /**
@@ -140,8 +140,8 @@ export async function speak(speech: Speech): Promise<number> {
  * ```
  * @returns {Promise<number>} process exit code.
  */
-export async function setClipboard(text: string): Promise<number> {
-  return await nirCmd.runNirCmd(["clipboard", "set", text]);
+export function setClipboard(text: string): Promise<number> {
+  return nirCmd.runNirCmd(["clipboard", "set", text]);
 }
 
 /**
@@ -156,8 +156,8 @@ export async function setClipboard(text: string): Promise<number> {
  * ```
  * @returns {Promise<number>}
  */
-export async function clearClipboard(): Promise<number> {
-  return await nirCmd.runNirCmd(["clipboard", "clear"]);
+export function clearClipboard(): Promise<number> {
+  return nirCmd.runNirCmd(["clipboard", "clear"]);
 }
 
 /**
@@ -177,7 +177,7 @@ export async function clearClipboard(): Promise<number> {
  * ```
  * @returns {Promise<number>} process exit code.
  */
-export async function balloon(balloon: Balloon): Promise<number> {
+export function balloon(balloon: Balloon): Promise<number> {
   const args: string[] = [
     "trayballoon",
     balloon.title,
@@ -185,7 +185,7 @@ export async function balloon(balloon: Balloon): Promise<number> {
     `shell32.dll,${balloon.icon}`,
     balloon.timeout.toString(),
   ];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
 
 /**
@@ -199,13 +199,13 @@ export async function balloon(balloon: Balloon): Promise<number> {
  * ```
  * @returns the process exit code
  */
-export async function setVolume(volume: number): Promise<number> {
+export function setVolume(volume: number): Promise<number> {
   const v = Math.floor(655.35 * volume);
   const args = [
     "setsysvolume",
     v.toString(),
   ];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
 
 /**
@@ -217,8 +217,8 @@ export async function setVolume(volume: number): Promise<number> {
  * ```
  * @returns the process exit code
  */
-export async function mute(): Promise<number> {
-  return await toggleMute(1);
+export function mute(): Promise<number> {
+  return toggleMute(1);
 }
 
 /**
@@ -230,8 +230,8 @@ export async function mute(): Promise<number> {
  * ```
  * @returns the process exit code
  */
-export async function unmute(): Promise<number> {
-  return await toggleMute(0);
+export function unmute(): Promise<number> {
+  return toggleMute(0);
 }
 
 /**
@@ -276,19 +276,18 @@ export async function questionBox(
  * @param text InfoBox message
  * @returns the process exit code
  */
-export async function infoBox(title: string, text: string): Promise<number> {
+export function infoBox(title: string, text: string): Promise<number> {
   const args = [
     "infobox",
     text,
     title,
   ];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }
-
-async function toggleMute(v: number): Promise<number> {
+ function toggleMute(v: number): Promise<number> {
   const args = [
     "mutesysvolume",
     v.toString(),
   ];
-  return await nirCmd.runNirCmd(args);
+  return nirCmd.runNirCmd(args);
 }

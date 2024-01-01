@@ -12,10 +12,11 @@ import { runNirCmd, validateNotBlank } from "./nirCmd.ts";
  * await win.byTitleExact("myfile.txt").min();
  * ```
  * @export
- * @param {string} title
+ * @param {string} title - Window Title
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
 export function byTitleExact(title: string): WindowFinder {
+  validateNotBlank(title, `ArgumentNullException: Argument - 'title'`)
   const wf: WindowFind = {
     title: {
       value: title,
@@ -36,10 +37,11 @@ export function byTitleExact(title: string): WindowFinder {
  * await win.byTitleContains("myfile.txt").flash();
  * ```
  * @export
- * @param {string} title
+ * @param {string} title - Window Title
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
 export function byTitleContains(title: string): WindowFinder {
+  validateNotBlank(title, `ArgumentNullException: Argument - 'title'`)
   const wf: WindowFind = {
     title: {
       value: title,
@@ -60,10 +62,11 @@ export function byTitleContains(title: string): WindowFinder {
  * await win.byTitleStartsWith("myfile.txt").close();
  * ```
  * @export
- * @param {string} title
+ * @param {string} title - Window Title
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
 export function byTitleStartsWith(title: string): WindowFinder {
+  validateNotBlank(title, `ArgumentNullException: Argument - 'title'`)
   const wf: WindowFind = {
     title: {
       value: title,
@@ -84,10 +87,11 @@ export function byTitleStartsWith(title: string): WindowFinder {
  * await win.byTitleEndsWith("myfile.txt").max();
  * ```
  * @export
- * @param {string} title
+ * @param {string} title - Window Title
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
 export function byTitleEndsWith(title: string): WindowFinder {
+  validateNotBlank(title, `ArgumentNullException: Argument - 'title'`)
   const wf: WindowFind = {
     title: {
       value: title,
@@ -108,10 +112,11 @@ export function byTitleEndsWith(title: string): WindowFinder {
  * await win.byProcessName("notepad.exe").max();
  * ```
  * @export
- * @param {string} processName
+ * @param {string} processName - Process name
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
 export function byProcessName(processName: string): WindowFinder {
+  validateNotBlank(processName, `ArgumentNullException: Argument - 'title'`)
   const wf: WindowFind = {
     process: processName
   }
@@ -129,7 +134,7 @@ export function byProcessName(processName: string): WindowFinder {
  * await win.byProcessName("notepad.exe").max();
  * ```
  * @export
- * @param {string} processId
+ * @param {string} processId - Process Id
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
 export function byProcessId(processId: number): WindowFinder {
@@ -174,47 +179,47 @@ export class WindowFinder {
     return await windowActions({ window: this.wf, action: action });
   }
 
-  async flash(): Promise<number> {
-    return await this.doAction("flash");
+  flash(): Promise<number> {
+    return this.doAction("flash");
   }
 
-  async min(): Promise<number> {
-    return await this.doAction("min");
+  min(): Promise<number> {
+    return this.doAction("min");
   }
 
-  async max(): Promise<number> {
-    return await this.doAction("max");
+  max(): Promise<number> {
+    return this.doAction("max");
   }
 
-  async activate(): Promise<number> {
-    return await this.doAction("activate");
+  activate(): Promise<number> {
+    return this.doAction("activate");
   }
 
-  async center(): Promise<number> {
-    return await this.doAction("center");
+  center(): Promise<number> {
+    return this.doAction("center");
   }
 
-  async close(): Promise<number> {
-    return await this.doAction("close");
+  close(): Promise<number> {
+    return this.doAction("close");
   }
 
-  async focus(): Promise<number> {
-    return await this.doAction("focus");
+  focus(): Promise<number> {
+    return this.doAction("focus");
   }
 
-  async normal(): Promise<number> {
-    return await this.doAction("normal");
+  normal(): Promise<number> {
+    return this.doAction("normal");
   }
 
-  async toggleMax(): Promise<number> {
-    return await this.doAction("togglemax");
+  toggleMax(): Promise<number> {
+    return this.doAction("togglemax");
   }
 
-  async toggleMin(): Promise<number> {
-    return await this.doAction("togglemin");
+  toggleMin(): Promise<number> {
+    return this.doAction("togglemin");
   }
 
-  async setSize(
+  setSize(
     x: number,
     y: number,
     width: number,
@@ -229,10 +234,10 @@ export class WindowFinder {
         height: height,
       },
     };
-    return await this.doAction(action);
+    return this.doAction(action);
   }
 
-  async moveBy(
+  moveBy(
     x: number,
     y: number,
     width: number,
@@ -247,7 +252,7 @@ export class WindowFinder {
         height: height,
       },
     };
-    return await this.doAction(action);
+    return this.doAction(action);
   }
 }
 
@@ -315,7 +320,7 @@ export class WindowFinder {
 * @param {*} param0.action
 * @returns {Promise<number>} process exit code.
 */
-async function windowActions(
+function windowActions(
  { window, action }: {
    window: WindowFind | string;
    action:
@@ -325,8 +330,7 @@ async function windowActions(
 ): Promise<number> {
  const args = getNirArgs(window, action);
  args.unshift("win");
- const res = await runNirCmd(args);
- return res;
+ return runNirCmd(args);
 }
 
 /**

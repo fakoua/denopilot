@@ -27,7 +27,7 @@ import * as nirCmd from "./nirCmd.ts";
  * await keyboard.sendKey({ key: Key.C, action: "up" });
  * ```
  */
-export async function sendKey(
+export function sendKey(
   { key, action }: { key: Key; action: "press" | "down" | "up" },
 ): Promise<number> {
   const args: Array<string> = ["sendkey"];
@@ -37,8 +37,7 @@ export async function sendKey(
   }
   args.push(`0x${k.toString(16)}`);
   args.push(action);
-  const res = await nirCmd.runNirCmd(args);
-  return res;
+  return nirCmd.runNirCmd(args);
 }
 
 /**
