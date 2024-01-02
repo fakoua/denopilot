@@ -57,7 +57,7 @@ export class MouseButton {
  * @returns {MouseButton}
  * @example
  * ```ts
- * import * as mouse from "./mod_mouse.ts"
+ * import * as mouse from "https://deno.land/x/denopilot/mod_mouse.ts";
  * mouse.left().click()
  * ```
  */
@@ -74,7 +74,7 @@ export function left(): MouseButton {
  * @returns {MouseButton}
  * @example
  * ```ts
- * import * as mouse from "./mod_mouse.ts"
+ * import * as mouse from "https://deno.land/x/denopilot/mod_mouse.ts";
  * mouse.right().click()
  * ```
  */
@@ -91,7 +91,7 @@ export function right(): MouseButton {
  * @returns {MouseButton}
  * @example
  * ```ts
- * import * as mouse from "./mod_mouse.ts"
+ * import * as mouse from "https://deno.land/x/denopilot/mod_mouse.ts";
  * mouse.middle().click()
  * ```
  */

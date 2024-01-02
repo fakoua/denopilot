@@ -151,7 +151,7 @@ export function byProcessId(processId: number): WindowFinder {
  * @export
  * @returns {WindowFinder} WindowFinder which contains all the actions
  */
-export function btActiveWindow(): WindowFinder {
+export function byActiveWindow(): WindowFinder {
   const wf: WindowFind = {
     active: true
   }

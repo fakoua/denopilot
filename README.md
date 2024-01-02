@@ -79,18 +79,13 @@ Control the mouse, including movement, left and right clicks, and scrolling.
 
 System actions including beeps, speak, clipboard, tray ballon and notifications.
 
-### Use Cases:
-
-1- Automation: DenoPilot allows users to script and automate repetitive tasks, saving time and reducing manual effort.
-
-2- Testing: Ideal for testing software applications by simulating user interactions and validating expected behaviors.
-
 ## Getting Started:
 
 ```ts
 import * as win from "https://deno.land/x/denopilot/mod_window.ts";
 import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
 import * as mouse from "https://deno.land/x/denopilot/mod_mouse.ts";
+import * as system from "https://deno.land/x/denopilot/mod_system.ts";
 ```
 
 ## Window Actions
@@ -224,6 +219,10 @@ import * as win from "https://deno.land/x/denopilot/mod_window.ts";
 // Maximize the active window
 await win.byActiveWindow().max();
 ```
+
+Window Finder | Window Action
+--- | ---
+byActiveWindow<br/>byProcessId<br/>byProcessName<br/>byTitleContains<br/>byTitleEndsWith<br/>byTitleExact<br/>byTitleStartsWith | activate<br/>center<br/>close<br/>flash<br/>focus<br/>max / min<br/>moveBy<br/>normal<br/>setSize<br/>toggleMax / togggleMin
 
 ## Keyboard Actions
 
@@ -390,6 +389,23 @@ await mouse.left().click();
 ### Overview
 
 This `mod` Allows you access and control various system actions.
+
+### System Methods:
+
+| Method         | Description                                    |
+|----------------|------------------------------------------------|
+| balloon        | Display a tray ballon.                         |
+| beep           | Plays a beep.                                  |
+| clearClipboard | Clear the clipboard.                           |
+| infoBox        | InfoBox dialog.                                |
+| mute           | Mute the system sound.                         |
+| questionBox    | Question Box dialog.                           |
+| screenshot     | Take a screenshot of monitor, region or window.|
+| setClipboard   | Set the specified text into the clipboard.     |
+| setVolume      | Set the computer sound volume.                 |
+| speak          | Speaks the contents of the text.               |
+| unmute         | Unmute the system sound.                       |
+| winbeep        | Plays the standard beep of Windows.            |
 
 ## License:
 

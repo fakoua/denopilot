@@ -115,6 +115,11 @@ export function winbeep(): Promise<number> {
  * @param {string} speech.text - Text to speak
  * @param {number=} speech.rate - Optional: Speech rate between -10 (very slow) and 10 (very fast)
  * @param {number=} speech.volume - Optional: Volume of the Speech between 0 and 100
+ * @example
+ * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
+ * await system.speak("Hello")
+ * ```
  * @returns {Promise<number>}
  */
 export function speak(speech: Speech): Promise<number> {
@@ -136,6 +141,7 @@ export function speak(speech: Speech): Promise<number> {
  * @param {string} text cliboard text
  * @example
  * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
  * await system.setClipboard("Hello Deno.")
  * ```
  * @returns {Promise<number>} process exit code.
@@ -152,6 +158,7 @@ export function setClipboard(text: string): Promise<number> {
  * @async
  * @example
  * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
  * await system.clearClipboard()
  * ```
  * @returns {Promise<number>}
@@ -173,6 +180,7 @@ export function clearClipboard(): Promise<number> {
  * @param {number} balloon.timeout - Tray Ballon timeout in milliseconds.
  * @example
  * ```ts
+ * import * as system from "https://deno.land/x/denopilot/mod_system.ts"
  * await system.balloon({title:"Deno", text:"Hello from deno", icon: 300, timeout:2000})
  * ```
  * @returns {Promise<number>} process exit code.

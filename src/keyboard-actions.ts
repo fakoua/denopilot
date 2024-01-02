@@ -11,18 +11,21 @@ import * as nirCmd from "./nirCmd.ts";
  * @returns {Promise<number>} A Promise that resolves to the exit code of the `nirCmd` process.
  * * @example
  * ```ts
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * // Press the 'A' key
  * await keyboard.sendKey({key: Key.A, action:"press"})
  * ```
  *
  * @example
  * ```ts
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * // Simulate key down for the 'B' key
  * await keyboard.sendKey({ key: Key.B, action: "down" });
  * ```
  *
  * @example
  * ```ts
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * // Release the 'C' key
  * await keyboard.sendKey({ key: Key.C, action: "up" });
  * ```
@@ -51,6 +54,7 @@ export function sendKey(
  * @example
  * ```ts
  * // Type the string "Hello"
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * await keyboard.typing("Hello");
  * ```
  */
@@ -73,6 +77,7 @@ export async function typing(text: string): Promise<void> {
  * @async
  * @example
  * ```ts
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * await keyboard.cut()
  * ```
  * @returns {Promise<void>}
@@ -91,6 +96,7 @@ export async function cut(): Promise<void> {
  * @async
  * @example
  * ```ts
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * await keyboard.copy()
  * ```
  * @returns {Promise<void>}
@@ -109,6 +115,7 @@ export async function copy(): Promise<void> {
  * @async
  * @example
  * ```ts
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * await keyboard.paste()
  * ```
  * @returns {Promise<void>}
@@ -127,6 +134,7 @@ export async function paste(): Promise<void> {
  * @async
  * @example
  * ```ts
+ * import * as keyboard from "https://deno.land/x/denopilot/mod_keyboard.ts";
  * await keyboard.selectAll()
  * ```
  * @returns {Promise<void>}

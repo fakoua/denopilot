@@ -1,5 +1,5 @@
 export {
-  btActiveWindow,
+  byActiveWindow,
   byProcessId,
   byProcessName,
   byTitleContains,
